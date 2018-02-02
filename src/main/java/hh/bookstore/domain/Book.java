@@ -1,16 +1,48 @@
 package hh.bookstore.domain;
 
-import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Book {
-	String title, author, isbn;
-	int year;
-	@Override
-	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year + ", price=" + price
-				+ "]";
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	private String title;
+	private String author;
+	private String isbn;
+	private int year;
+	private long price;
+	
+	public Book() {}
+
+	public Book(String title, String author, String isbn, int year, long price) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.year = year;
+		this.price = price;
 	}
-	BigDecimal price;
+
+	public Book(Long id, String title, String author, String isbn, int year, long price) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.year = year;
+		this.price = price;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -35,11 +67,13 @@ public class Book {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public BigDecimal getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(BigDecimal price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
+	
+	
 	
 }
