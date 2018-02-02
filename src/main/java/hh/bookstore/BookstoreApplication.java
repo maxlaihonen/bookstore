@@ -23,8 +23,8 @@ public class BookstoreApplication {
 	public CommandLineRunner bookDemo(BookRepository repository) {
 		return (args) -> {
 			log.info("save a couple of books");
-			repository.save(new Book("Testi", "Testaaja", "9325YY", 1992, 18));
-			repository.save(new Book("Testi2", "Testaaja2", "UUU9325YY", 1993, 11));
+			repository.save(new Book("Testi", "Testaaja", "9325YY", 1992, 18.95));
+			repository.save(new Book("Testi2", "Testaaja2", "UUU9325YY", 1993, 11.22));
 			
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {

@@ -1,9 +1,26 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Bookstore</title>
-	</head>
-	<body>
-		<h1>Hello world</h1>
-	</body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Books</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Books</h1>
+    <table>
+		<tr>
+		    <th>Title</th>
+		    <th>Author</th>
+		    <th>ISBN</th>
+		    <th>Year</th>
+		    <th>Price</th>
+		</tr>  
+    	<tr th:each = "book : ${books}">
+    		<td th:text="${book.Title}"></td>
+    		<td th:text="${book.Author}"></td>
+    		<td th:text="${book.isbn}"></td>
+    		<td th:text="${book.year}"></td>
+    		<td th:text="${book.price}"></td>	
+    	</tr>
+     </table>
+</body>
 </html>
