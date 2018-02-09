@@ -29,6 +29,10 @@ public class BookstoreController {
         return "index";
     }
     
+    
+    /*
+     * REST aiheuttaa virheen ohjelman käynnistyessä. Poistettu toistaiseksi.
+     * 
     @RequestMapping(value="/api", method = RequestMethod.GET)
 	public @ResponseBody List<Book> bookListRest() {
 		return (List<Book>) bookrepository.findAll();
@@ -38,6 +42,7 @@ public class BookstoreController {
     public @ResponseBody Book findbookRest(@PathVariable("id") Long bookId) {
     	return (Book) bookrepository.findOne(bookId);
     }
+    */
     
     @RequestMapping(value = "/add")
     public String addBook(Model model){
