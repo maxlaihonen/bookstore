@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.bookstore.domain.Book;
 import hh.bookstore.domain.BookRepository;
+import hh.bookstore.domain.Category;
+import hh.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -20,16 +22,24 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository) {
+	public CommandLineRunner bookDemo(BookRepository bookrepository, CategoryRepository categoryrepository) {
 		return (args) -> {
-			log.info("save a couple of books");
-			repository.save(new Book("BbTesti", "Ayn Rand", "978-952-312-672-5", 1992, 18.95));
-			repository.save(new Book("Testi2", "Testaaja2", "UUU9325YY", 1993, 11.22));
-			repository.save(new Book("AaTesti2", "Testaaja2", "UUU9325YY", 1993, 11.22));
-			
+			log.info("save a couple of books");		
+			categoryrepository.save(new Category("Sarjakuva"));
+			categoryrepository.save(new Category("Tietokirja"));
+			categoryrepository.save(new Category("Kaunokirjallisuus"));
+		
+			bookrepository.save(new Book("Testi 1", "Testaaja 1", "978-952-312-672-5", 2000, 18.95, categoryrepository.findByName("Sarjakuva").get(0)));
+			bookrepository.save(new Book("Testi 2", "Testaaja 2", "978-952-312-672-5", 2001, 11.22, categoryrepository.findByName("Sarjakuva").get(0)));
+			bookrepository.save(new Book("Testi 3", "Testaaja 3", "978-952-312-672-5", 2002, 11.22, categoryrepository.findByName("Sarjakuva").get(0)));
+		
 			log.info("fetch all books");
-			for (Book book : repository.findAll()) {
+			for (Book book : bookrepository.findAll()) {
 				log.info(book.toString());
+			}
+			log.info("fetch all categories");
+			for (Category category : categoryrepository.findAll()) {
+				log.info(category.toString());
 			}
 
 		};
