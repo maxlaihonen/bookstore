@@ -56,6 +56,13 @@ public class BookstoreController {
         bookrepository.save(book);
         return "redirect:index";
     }
+    
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editBook(@PathVariable("id") Long bookId, Model model){
+    	model.addAttribute("book", bookrepository.findOne(bookId));
+    	model.addAttribute("categories", categoryrepository.findAll());
+        return "editbook";
+    }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
