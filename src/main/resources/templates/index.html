@@ -7,6 +7,7 @@
 </head>
 <body>
 	<h1>Books</h1>
+	<h5 th:inline="text">Logged in as [[${#httpServletRequest.remoteUser}]]</h5>
     <table class="table table-striped">
 		<tr>
 		    <th>Title</th>
@@ -26,9 +27,12 @@
     		<td th:text="${book.price}"></td>
     		<td th:text="${book.category.name}"></td>
     		<td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
-    		<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>	
+    		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>	
     	</tr>
      </table>
      <a href="/add" class="btn btn-success">Add a book</a>
+     <form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
 </body>
 </html>

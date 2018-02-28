@@ -23,16 +23,18 @@ public class BookstoreController {
 	@Autowired
 	private CategoryRepository categoryrepository; 
 	
-    @RequestMapping(value="/index")
+	@RequestMapping(value="/login")
+	    public String login() {	
+	        return "login";
+	    }	
+	
+    @RequestMapping(value="/")
     public String bookList(Model model) {	
         model.addAttribute("books", bookrepository.findAll());
         return "index";
     }
-    
-    
+
     /*
-     * REST aiheuttaa virheen ohjelman käynnistyessä. Poistettu toistaiseksi.
-     * 
     @RequestMapping(value="/api", method = RequestMethod.GET)
 	public @ResponseBody List<Book> bookListRest() {
 		return (List<Book>) bookrepository.findAll();
@@ -43,7 +45,6 @@ public class BookstoreController {
     	return (Book) bookrepository.findOne(bookId);
     }
     */
-    
     @RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
@@ -54,7 +55,7 @@ public class BookstoreController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Book book){
         bookrepository.save(book);
-        return "redirect:index";
+        return "redirect:/";
     }
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -67,7 +68,7 @@ public class BookstoreController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
     bookrepository.delete(bookId);
-        return "redirect:/index";
+        return "redirect:/";
     }  
     
 }
