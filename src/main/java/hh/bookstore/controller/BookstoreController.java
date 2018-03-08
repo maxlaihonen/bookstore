@@ -28,23 +28,28 @@ public class BookstoreController {
 	        return "login";
 	    }	
 	
-    @RequestMapping(value="/")
+	@RequestMapping(value = "/")
+    public String index(){
+        return "redirect:/booklist";
+    }
+    
+	@RequestMapping(value="/booklist")
     public String bookList(Model model) {	
         model.addAttribute("books", bookrepository.findAll());
         return "index";
     }
 
-    /*
-    @RequestMapping(value="/api", method = RequestMethod.GET)
+    
+    @RequestMapping(value="/books", method = RequestMethod.GET)
 	public @ResponseBody List<Book> bookListRest() {
 		return (List<Book>) bookrepository.findAll();
 	}
 
-    @RequestMapping(value="/api/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/books/{id}", method = RequestMethod.GET)
     public @ResponseBody Book findbookRest(@PathVariable("id") Long bookId) {
     	return (Book) bookrepository.findOne(bookId);
     }
-    */
+    
     @RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
@@ -55,7 +60,7 @@ public class BookstoreController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Book book){
         bookrepository.save(book);
-        return "redirect:/";
+        return "redirect:/booklist";
     }
     
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -68,7 +73,7 @@ public class BookstoreController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
     bookrepository.delete(bookId);
-        return "redirect:/";
+        return "redirect:/booklist";
     }  
     
 }
